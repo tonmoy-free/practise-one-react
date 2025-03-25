@@ -47,3 +47,11 @@
   border-radius: 20px;
   border: 2px solid salmon;
 }
+
+.card{
+  border: 2px solid gold;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 20px;
+
+}

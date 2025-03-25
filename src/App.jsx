@@ -5,8 +5,44 @@ import Actor from './Actor';
 import Singer from './Singer';
 import Counter from './Counter';
 import Batsman from './Batsman';
+import users from './Users';
+import Users from './Users';
+import { Suspense } from 'react';
+import Friends from './friends';
+import Office from './Office';
+import Posts from './Posts';
+import Players from './Players';
+
+const fetchUsers = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json())
+
+
+const friendsPromise = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json())
+
+
+const officePromise = fetch('https://jsonplaceholder.typicode.com/users')
+  .then(res => res.json())
+
+  // async fetch data
+const fetchPosts = async() =>{
+  const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+  return res.json();
+}
+
+
+
+// const fetchFriends = async() =>{
+//   const res = await fetch('https://jsonplaceholder.typicode.com/users');
+//   return res.json();
+// }  
+
 
 function App() {
+  //asyc post ar fetch promise
+  const postsPromise = fetchPosts();
+
+  // const friendsPromise = fetchFriends();
   // const actors = ['Bappa Raj', 'Omor Sunny', 'Salman Sha'];
   // // const time = 50;
 
@@ -32,6 +68,24 @@ function App() {
   return (
     <>
       <h1>React Core Concepts</h1>
+
+      <Players></Players>
+
+      <Suspense fallback={<h4>Post are coming.....</h4>}>
+        <Posts postsPromise={postsPromise}></Posts>
+      </Suspense>
+
+      <Suspense fallback={<h3>Loading...</h3>}>
+        <Office officePromise={officePromise}></Office>
+      </Suspense>
+
+      <Suspense fallback={<h3>Loading...</h3>}>
+        <Users fetchUsers={fetchUsers}></Users>
+      </Suspense>
+
+      <Suspense fallback={<h3>Friens are coming for treat...</h3>}>
+        <Friends friendsPromise={friendsPromise}></Friends>
+      </Suspense>
 
       <Batsman></Batsman>
 
